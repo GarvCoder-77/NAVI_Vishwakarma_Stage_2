@@ -1,0 +1,40 @@
+# NAVI — Navigation and Assistance for Visually Impaired
+
+Stage 2 engineering repository for NAVI, an assistive robotic mobility platform for visually impaired users.
+
+## Repository purpose
+
+This repository preserves the supplied ROS 2/Gazebo development package without modifying its contents, while providing a clear home for Stage 2 mechanical, electronics, validation, and maker-journey evidence as it becomes available.
+
+## Current implementation
+
+The imported implementation supports autonomous indoor navigation and simulation with ROS 2, Gazebo, SLAM configuration, Arduino motor/encoder firmware, URDF, mechanical meshes, and automated tests. The original package is retained under `source/NAVI_ROS2/`; its internal package name remains unchanged to avoid breaking the supplied implementation.
+
+## Stage 2 development focus
+
+- LiDAR mapping and map-aware navigation
+- Improved autonomous obstacle avoidance
+- Voice feedback and interaction
+- Text-reading capability
+- Compact mechanical redesign
+- Hardware integration and validation
+
+## Evidence policy
+
+- Keep supplied and future raw engineering files unchanged.
+- Add native CAD, KiCad, and analysis files to the dedicated directories below.
+- Use external links only for videos; do not commit embedded videos.
+- Record each meaningful Stage 2 update in a separate Git commit.
+
+## Repository map
+
+| Location | Contents |
+| --- | --- |
+| `source/NAVI_ROS2/` | Original supplied ROS 2/Gazebo source package, preserved intact |
+| `hardware/native-cad/` | Native mechanical CAD and analysis exports |
+| `electronics/native-design/` | Schematics, PCB design files, BOMs, and electronics evidence |
+| `analysis/` | MATLAB or other engineering calculations and validation data |
+| `evidence/maker-journey/` | Dated build photos and design-tool screenshots |
+| `evidence/external-media-links.md` | External demonstration-video links only |
+| `docs/` | Stage 2 notes, validation records, and supporting documentation |
+

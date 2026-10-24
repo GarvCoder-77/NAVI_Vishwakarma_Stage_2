@@ -1,0 +1,21 @@
+# ROS 2 / colcon build artifacts
+build/
+install/
+log/
+
+# Python runtime artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Editor and OS metadata
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
+
+# Generated media only; raw evidence assets are intentionally tracked
+*.mp4
+*.mov
+*.avi
+

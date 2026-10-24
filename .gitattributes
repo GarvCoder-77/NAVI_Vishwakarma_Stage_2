@@ -1,0 +1,3 @@
+# Preserve imported engineering-source bytes exactly as received.
+source/NAVI_ROS2/** -text
+

@@ -1,4 +1,4 @@
 # Native Mechanical Design Files
 
-Place supplied mechanical-design source files here exactly as received. Examples include SolidWorks part or assembly files, STEP files, and FEA exports.
+This includes all raw and native CAD files used for the design
 

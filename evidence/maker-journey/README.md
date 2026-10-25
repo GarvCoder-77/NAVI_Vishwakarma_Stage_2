@@ -1,4 +1,3 @@
 # Maker Journey Evidence
 
-Add dated lab photographs and screenshots showing team members performing design, fabrication, assembly, or validation work. Do not alter original evidence files.
-
+This includes photos and videos of our working on the robot

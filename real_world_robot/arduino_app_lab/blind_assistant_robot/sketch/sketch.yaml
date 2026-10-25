@@ -1,0 +1,4 @@
+default_profile: uno_q_mcu
+profiles:
+  uno_q_mcu:
+    board: arduino:zephyr:uno_q

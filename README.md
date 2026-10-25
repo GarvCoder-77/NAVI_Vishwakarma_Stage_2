@@ -30,7 +30,8 @@ The imported implementation supports autonomous indoor navigation and simulation
 
 | Location | Contents |
 | --- | --- |
-| `source/NAVI_ROS2/` | Original supplied ROS 2/Gazebo source package, preserved intact |
+| `real_world_robot/` | Physical robot software: Arduino App Lab bundle (`.zip`), Arduino Uno Q MCU firmware, hardware ROS 2 nodes, and single-command `./start_demo.sh` launcher |
+| `ros_simulation/` | Complete Gazebo Harmonic indoor room simulation workspace, autonomous explorer, dynamic traffic simulator, and 14/14 automated test cases |
 | `hardware/native-cad/` | Native mechanical CAD and analysis exports |
 | `electronics/native-design/` | Schematics, PCB design files, BOMs, and electronics evidence |
 | `analysis/` | MATLAB or other engineering calculations and validation data |

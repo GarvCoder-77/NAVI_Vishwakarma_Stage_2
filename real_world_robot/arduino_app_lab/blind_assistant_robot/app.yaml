@@ -1,0 +1,5 @@
+name: "Blind Assistant Robot Base"
+description: "Dual-Brain onboard robot controller for Arduino UNO Q. Runs MCU motor/encoder firmware and MPU ROS 2 sensor streaming & Bluetooth voice guidance."
+version: "1.0.0"
+author: "Blind Assistant Robot Team"
+icon: "robot"

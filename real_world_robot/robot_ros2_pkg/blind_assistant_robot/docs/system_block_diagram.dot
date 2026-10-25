@@ -1,0 +1,398 @@
+digraph BlindAssistantRobot_SystemBlockDiagram {
+    // --- Global Graph Attributes ---
+    graph [
+        rankdir="TB",
+        nodesep=0.45,
+        ranksep=0.65,
+        compound=true,
+        fontname="Helvetica-Bold",
+        fontsize=16,
+        bgcolor="#FAFBFC",
+        pad="0.5,0.5",
+        splines=true,
+        concentrate=false
+    ];
+
+    // --- Default Node & Edge Attributes ---
+    node [
+        fontname="Helvetica",
+        fontsize=10,
+        shape=rect,
+        style="filled,rounded",
+        fillcolor="#FFFFFF",
+        color="#CBD5E1",
+        penwidth=1.5,
+        margin="0.18,0.12"
+    ];
+
+    edge [
+        fontname="Helvetica-Bold",
+        fontsize=8.5,
+        penwidth=1.6,
+        color="#475569",
+        arrowsize=0.85
+    ];
+
+    // --- Header Banner ---
+    subgraph cluster_header {
+        style="filled,rounded";
+        color="#0F172A";
+        fillcolor="#0F172A";
+        penwidth=2.0;
+        margin=14;
+
+        TITLE [
+            label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+                <TR><TD ALIGN="CENTER"><FONT COLOR="#38BDF8" POINT-SIZE="18"><B>BLIND ASSISTANT ROBOT — SYSTEM BLOCK DIAGRAM</B></FONT></TD></TR>
+                <TR><TD ALIGN="CENTER"><FONT COLOR="#94A3B8" POINT-SIZE="10">Integrated Subsystems Architecture: Mechanical, Actuation/Power, Electronic Controllers (Arduino UNO Q Dual-Brain), &amp; Firmware/Logic Flow</FONT></TD></TR>
+            </TABLE>>,
+            shape=none,
+            fillcolor="#0F172A",
+            fontcolor="#FFFFFF"
+        ];
+    }
+
+    // =========================================================================
+    // SUBSYSTEM 1: ACTUATION & POWER
+    // =========================================================================
+    subgraph cluster_subsystem_power {
+        label=<<TABLE BORDER="0" CELLBORDER="0"><TR><TD><FONT COLOR="#B45309" POINT-SIZE="12"><B>⚡ 2. ACTUATION &amp; POWER SUBSYSTEM</B></FONT></TD></TR></TABLE>>;
+        style="filled,rounded";
+        color="#FDE68A";
+        fillcolor="#FFFBEB";
+        penwidth=2.0;
+        margin=16;
+
+        BATTERY [
+            label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                <TR><TD ALIGN="CENTER"><B>3S Li-ion Battery Pack</B></TD></TR>
+                <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">11.1V - 12.6V | 4500 mAh (25C)<br/>Runtime: 3.0 - 4.0 Hours</FONT></TD></TR>
+            </TABLE>>,
+            fillcolor="#FEF3C7",
+            color="#D97706"
+        ];
+
+        FUSE [
+            label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                <TR><TD ALIGN="CENTER"><B>Protection &amp; Switch</B></TD></TR>
+                <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">10A Blade Fuse + Rocker Kill Switch</FONT></TD></TR>
+            </TABLE>>,
+            fillcolor="#FEF3C7",
+            color="#D97706"
+        ];
+
+        BUCK [
+            label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                <TR><TD ALIGN="CENTER"><B>DC-DC Buck Converter</B></TD></TR>
+                <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">LM2596 / XL4015 (12V -&gt; 5.0V @ 3A)</FONT></TD></TR>
+            </TABLE>>,
+            fillcolor="#FEF3C7",
+            color="#D97706"
+        ];
+
+        H_BRIDGE [
+            label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                <TR><TD ALIGN="CENTER"><B>Dual H-Bridge Driver</B></TD></TR>
+                <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">L298N / TB6612FNG (2A / Channel)<br/>Hardware PWM Speed &amp; Dir Control</FONT></TD></TR>
+            </TABLE>>,
+            fillcolor="#FEF3C7",
+            color="#D97706"
+        ];
+
+        L_MOTOR [
+            label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                <TR><TD ALIGN="CENTER"><B>Left 12V DC Gearmotor</B></TD></TR>
+                <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">1:30 Metal Spur Gearbox | 40 Nm Stall</FONT></TD></TR>
+            </TABLE>>,
+            fillcolor="#FEF3C7",
+            color="#D97706"
+        ];
+
+        R_MOTOR [
+            label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                <TR><TD ALIGN="CENTER"><B>Right 12V DC Gearmotor</B></TD></TR>
+                <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">1:30 Metal Spur Gearbox | 40 Nm Stall</FONT></TD></TR>
+            </TABLE>>,
+            fillcolor="#FEF3C7",
+            color="#D97706"
+        ];
+
+        L_ENC [
+            label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                <TR><TD ALIGN="CENTER"><B>Left Optical Encoder</B></TD></TR>
+                <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">360 Counts / Revolution (CPR)</FONT></TD></TR>
+            </TABLE>>,
+            fillcolor="#FEF3C7",
+            color="#D97706"
+        ];
+
+        R_ENC [
+            label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                <TR><TD ALIGN="CENTER"><B>Right Optical Encoder</B></TD></TR>
+                <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">360 Counts / Revolution (CPR)</FONT></TD></TR>
+            </TABLE>>,
+            fillcolor="#FEF3C7",
+            color="#D97706"
+        ];
+    }
+
+    // =========================================================================
+    // SUBSYSTEM 2: ELECTRONIC CONTROLLERS — ARDUINO UNO Q DUAL-BRAIN
+    // =========================================================================
+    subgraph cluster_subsystem_uno_q {
+        label=<<TABLE BORDER="0" CELLBORDER="0"><TR><TD><FONT COLOR="#0284C7" POINT-SIZE="13"><B>🔲 3. ELECTRONIC CONTROLLERS — ARDUINO UNO Q DUAL-BRAIN SBC</B></FONT></TD></TR></TABLE>>;
+        style="filled,rounded";
+        color="#0284C7";
+        fillcolor="#F0F9FF";
+        penwidth=2.5;
+        margin=18;
+
+        // --- Qualcomm Linux MPU Side ---
+        subgraph cluster_mpu_side {
+            label=<<TABLE BORDER="0" CELLBORDER="0"><TR><TD><FONT COLOR="#0369A1" POINT-SIZE="11"><B>🐧 Linux MPU Brain: Qualcomm® Dragonwing™ QRB2210</B></FONT></TD></TR><TR><TD><FONT POINT-SIZE="8" COLOR="#64748B">Quad-Core ARM Cortex-A53 @ 2.0 GHz | Adreno 702 GPU | 2GB/4GB LPDDR4 | Debian Linux</FONT></TD></TR></TABLE>>;
+            style="filled,rounded";
+            color="#38BDF8";
+            fillcolor="#E0F2FE";
+            penwidth=1.8;
+            margin=12;
+
+            ROS2_CORE [
+                label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                    <TR><TD ALIGN="CENTER"><B>ROS 2 Middleware Stack</B></TD></TR>
+                    <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">Humble / Jazzy | TF2 Transform Buffer<br/>map -&gt; odom -&gt; base_footprint -&gt; sensors</FONT></TD></TR>
+                </TABLE>>,
+                fillcolor="#FFFFFF",
+                color="#0284C7"
+            ];
+
+            NODE_VISION [
+                label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                    <TR><TD ALIGN="CENTER"><B>Semantic Vision Node</B></TD></TR>
+                    <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">OpenCV HSV Landmark Contours (7 Classes)<br/>Central 50% ROI Depth Extraction<br/>Adreno 702 GPU Accelerated</FONT></TD></TR>
+                </TABLE>>,
+                fillcolor="#FFFFFF",
+                color="#0284C7"
+            ];
+
+            NODE_SLAM [
+                label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                    <TR><TD ALIGN="CENTER"><B>SLAM Toolbox</B></TD></TR>
+                    <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">Synchronous 2D Occupancy Grid (/map)<br/>Resolution: 0.05m / cell | Scan Matcher</FONT></TD></TR>
+                </TABLE>>,
+                fillcolor="#FFFFFF",
+                color="#0284C7"
+            ];
+
+            NODE_EXPLORER [
+                label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                    <TR><TD ALIGN="CENTER"><B>Autonomous Explorer Engine</B></TD></TR>
+                    <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">Frontier Detection &amp; BFS Clustering<br/>8-Connected A* Planner + String Pulling<br/>Doorway Corridor Funneling (+/-14° cone)<br/>Dynamic Pedestrian Yielding (&lt; 1.25m)</FONT></TD></TR>
+                </TABLE>>,
+                fillcolor="#FFFFFF",
+                color="#0284C7"
+            ];
+
+            NODE_CONTROLLER [
+                label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                    <TR><TD ALIGN="CENTER"><B>Regulated Pure Pursuit</B></TD></TR>
+                    <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">Adaptive Lookahead (0.25 - 0.48m)<br/>Curvature Speed Scaling &amp; Slew Limiter<br/>Generates /cmd_vel (v, omega)</FONT></TD></TR>
+                </TABLE>>,
+                fillcolor="#FFFFFF",
+                color="#0284C7"
+            ];
+
+            NODE_UI [
+                label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                    <TR><TD ALIGN="CENTER"><B>HMI &amp; Terminal Interfaces</B></TD></TR>
+                    <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">Native OpenCV SLAM Map (700x700 + HUD)<br/>Live Camera View (640x480)<br/>room_cli (NLP Synonym Intent Parser)</FONT></TD></TR>
+                </TABLE>>,
+                fillcolor="#FFFFFF",
+                color="#0284C7"
+            ];
+        }
+
+        // --- On-Chip Bridge ---
+        ON_CHIP_BRIDGE [
+            label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                <TR><TD ALIGN="CENTER"><FONT COLOR="#FFFFFF"><B>⚡ ON-CHIP ARDUINO BRIDGE RPC LAYER</B></FONT></TD></TR>
+                <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#E0E7FF">High-Speed Shared Memory / Virtual Serial (/dev/ttyRPMSG) | Zero Cable Latency</FONT></TD></TR>
+            </TABLE>>,
+            shape=rect,
+            style="filled,rounded",
+            fillcolor="#4338CA",
+            color="#3730A3"
+        ];
+
+        // --- STM32 Real-Time MCU Side ---
+        subgraph cluster_mcu_side {
+            label=<<TABLE BORDER="0" CELLBORDER="0"><TR><TD><FONT COLOR="#15803D" POINT-SIZE="11"><B>⚡ Real-Time MCU Brain: STMicroelectronics® STM32U585</B></FONT></TD></TR><TR><TD><FONT POINT-SIZE="8" COLOR="#64748B">32-Bit ARM Cortex-M33 @ 160 MHz | Zephyr RTOS / Arduino Runtime | Sub-Microsecond Determinism</FONT></TD></TR></TABLE>>;
+            style="filled,rounded";
+            color="#86EFAC";
+            fillcolor="#F0FDF4";
+            penwidth=1.8;
+            margin=12;
+
+            MCU_ISR [
+                label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                    <TR><TD ALIGN="CENTER"><B>Hardware Interrupt Handlers (ISRs)</B></TD></TR>
+                    <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">EXTI2 (Pin 2: Left) &amp; EXTI3 (Pin 3: Right)<br/>20 Hz Formatted Tick Packet Broadcast</FONT></TD></TR>
+                </TABLE>>,
+                fillcolor="#FFFFFF",
+                color="#16A34A"
+            ];
+
+            MCU_PWM [
+                label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                    <TR><TD ALIGN="CENTER"><B>32-Bit Hardware PWM Timers</B></TD></TR>
+                    <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">Pins 5 &amp; 6 @ 980 Hz (0 - 255 Duty)<br/>Direction Gates (Pins 7, 8, 9, 10)</FONT></TD></TR>
+                </TABLE>>,
+                fillcolor="#FFFFFF",
+                color="#16A34A"
+            ];
+
+            MCU_WATCHDOG [
+                label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                    <TR><TD ALIGN="CENTER"><B>Safety Watchdog Failsafe</B></TD></TR>
+                    <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">500ms Timeout: Auto-Zero Motor PWM<br/>Runaway Motion Prevention</FONT></TD></TR>
+                </TABLE>>,
+                fillcolor="#FFFFFF",
+                color="#16A34A"
+            ];
+        }
+    }
+
+    // =========================================================================
+    // SUBSYSTEM 3: SENSORS & EXTERNAL PERIPHERALS
+    // =========================================================================
+    subgraph cluster_subsystem_peripherals {
+        label=<<TABLE BORDER="0" CELLBORDER="0"><TR><TD><FONT COLOR="#6D28D9" POINT-SIZE="12"><B>📡 SENSOR SUITE &amp; ASSISTIVE PERIPHERALS</B></FONT></TD></TR></TABLE>>;
+        style="filled,rounded";
+        color="#DDD6FE";
+        fillcolor="#F5F3FF";
+        penwidth=2.0;
+        margin=16;
+
+        REALSENSE_D435I [
+            label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                <TR><TD ALIGN="CENTER"><B>Intel RealSense D435i</B></TD></TR>
+                <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">RGB-D Depth Perception Camera<br/>640x480 RGB @ 15Hz | 32FC1 Depth<br/>HFOV: 1.15 rad (65.9°) | Range: 0.10m - 10.0m</FONT></TD></TR>
+            </TABLE>>,
+            fillcolor="#EDE9FE",
+            color="#7C3AED"
+        ];
+
+        YDLIDAR_X4 [
+            label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                <TR><TD ALIGN="CENTER"><B>YDLidar X4 Planar Scanner</B></TD></TR>
+                <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">360° Planar Laser Turret @ 10Hz<br/>360 Samples (1.0° Res) | Range: 0.12m - 10.0m</FONT></TD></TR>
+            </TABLE>>,
+            fillcolor="#EDE9FE",
+            color="#7C3AED"
+        ];
+
+        AUDIO_SPEAKER [
+            label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                <TR><TD ALIGN="CENTER"><B>Audio DAC &amp; Speaker</B></TD></TR>
+                <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">Assistive Natural Language Voice Speech<br/>Spoken Alerts via /voice_speech</FONT></TD></TR>
+            </TABLE>>,
+            fillcolor="#EDE9FE",
+            color="#7C3AED"
+        ];
+    }
+
+    // =========================================================================
+    // SUBSYSTEM 4: MECHANICAL STRUCTURE & CHASSIS
+    // =========================================================================
+    subgraph cluster_subsystem_mech {
+        label=<<TABLE BORDER="0" CELLBORDER="0"><TR><TD><FONT COLOR="#0F766E" POINT-SIZE="12"><B>🛠️ 1. MECHANICAL STRUCTURE &amp; KINEMATICS</B></FONT></TD></TR></TABLE>>;
+        style="filled,rounded";
+        color="#99F6E4";
+        fillcolor="#F0FDFA";
+        penwidth=2.0;
+        margin=16;
+
+        CHASSIS [
+            label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                <TR><TD ALIGN="CENTER"><B>Differential Drive Chassis Base</B></TD></TR>
+                <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">SolidWorks CAD Aluminum/Acrylic Baseplate (260x190x76 mm)<br/>Total Mass: ~2.3 kg (CoM z = +0.032m) | Footprint Radius: 0.22m</FONT></TD></TR>
+            </TABLE>>,
+            fillcolor="#CCFBF1",
+            color="#0D9488"
+        ];
+
+        WHEELS [
+            label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                <TR><TD ALIGN="CENTER"><B>Dual Drive Wheels</B></TD></TR>
+                <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">Diameter: 66mm | Rubber Tires (mu = 1.2)<br/>Track Width (Separation): L = 176mm</FONT></TD></TR>
+            </TABLE>>,
+            fillcolor="#CCFBF1",
+            color="#0D9488"
+        ];
+
+        CASTER_SKID [
+            label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                <TR><TD ALIGN="CENTER"><B>Ground Contact Supports</B></TD></TR>
+                <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">Rear 1.5-in Nylon Omni Caster (x = -0.10m, mu = 0.001)<br/>Front Anti-Tip Skid Ball (x = +0.10m, mu = 0.001)</FONT></TD></TR>
+            </TABLE>>,
+            fillcolor="#CCFBF1",
+            color="#0D9488"
+        ];
+
+        MOUNTS [
+            label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+                <TR><TD ALIGN="CENTER"><B>Rigid Sensor Mounts</B></TD></TR>
+                <TR><TD ALIGN="CENTER"><FONT POINT-SIZE="8" COLOR="#64748B">Top Turret: Elevated LiDAR (z = +0.081m, 360° Clear Line-of-Sight)<br/>Front Aperture: RealSense Recessed Bracket (x = +0.062m, z = +0.052m)</FONT></TD></TR>
+            </TABLE>>,
+            fillcolor="#CCFBF1",
+            color="#0D9488"
+        ];
+    }
+
+    // =========================================================================
+    // CONNECTIONS & BUS ROUTING
+    // =========================================================================
+
+    // --- Power Routing (Red Lines) ---
+    BATTERY -> FUSE [color="#DC2626", label=" 12.6V Main"];
+    FUSE -> H_BRIDGE [color="#DC2626", label=" 12V High-Current Bus"];
+    FUSE -> BUCK [color="#DC2626", label=" 12V Input"];
+    BUCK -> ON_CHIP_BRIDGE [color="#EA580C", label=" 5.0V @ 3A Main Logic Rail (Powers UNO Q)"];
+    BUCK -> YDLIDAR_X4 [color="#EA580C", label=" 5.0V Turret Motor Power"];
+    ON_CHIP_BRIDGE -> REALSENSE_D435I [color="#EA580C", label=" 5V USB-C VBUS"];
+
+    // --- High-Speed Sensor Data to Qualcomm Linux MPU (Blue Lines) ---
+    REALSENSE_D435I -> NODE_VISION [color="#2563EB", penwidth=2.2, label=" USB 3.0 SuperSpeed\n(/camera/image_raw & /camera/depth/image_raw)"];
+    YDLIDAR_X4 -> NODE_SLAM [color="#0284C7", penwidth=2.0, label=" USB-UART @ 128,000 baud\n(/scan 360° LaserScan)"];
+    YDLIDAR_X4 -> NODE_EXPLORER [color="#0284C7", style=dashed, label=" Corridor Ray Checks"];
+
+    // --- ROS 2 Internal Cognitive Data Flow (Purple Lines) ---
+    NODE_SLAM -> ROS2_CORE [color="#7C3AED", label=" /map (OccupancyGrid) & TF (map->odom)"];
+    ROS2_CORE -> NODE_EXPLORER [color="#7C3AED", label=" Synchronous Costmap & Robot Pose"];
+    NODE_VISION -> NODE_EXPLORER [color="#7C3AED", label=" 3D Discovered Landmarks & /detected_human"];
+    NODE_EXPLORER -> NODE_CONTROLLER [color="#7C3AED", label=" Active A* Trajectory"];
+    NODE_UI -> NODE_EXPLORER [color="#475569", style=dashed, label=" /guide_to & CLI intents"];
+    NODE_EXPLORER -> AUDIO_SPEAKER [color="#D97706", label=" /voice_speech (Spoken Audio Alerts)"];
+
+    // --- Inter-Processor Communication (Qualcomm MPU <-> On-Chip Bridge <-> STM32 MCU) ---
+    NODE_CONTROLLER -> ON_CHIP_BRIDGE [color="#4338CA", penwidth=2.5, label=" /cmd_vel (Linear v, Angular omega)"];
+    ON_CHIP_BRIDGE -> MCU_PWM [color="#4338CA", penwidth=2.5, label=" Internal RPC Velocity Targets"];
+    MCU_ISR -> ON_CHIP_BRIDGE [color="#059669", penwidth=2.2, label=" High-Speed Shared Memory (20Hz Encoder Ticks)"];
+    ON_CHIP_BRIDGE -> ROS2_CORE [color="#059669", penwidth=2.2, label=" Wheel Odometry (/odom) & odom->base_link TF"];
+
+    // --- STM32 MCU Hardware Signals to Motors & Encoders ---
+    MCU_PWM -> H_BRIDGE [color="#16A34A", penwidth=2.0, label=" Hardware PWM (Pins 5,6) & Dir (Pins 7,8,9,10)"];
+    H_BRIDGE -> L_MOTOR [color="#D97706", penwidth=2.0, label=" 12V PWM Drive"];
+    H_BRIDGE -> R_MOTOR [color="#D97706", penwidth=2.0, label=" 12V PWM Drive"];
+    L_MOTOR -> L_ENC [style=dotted, label=" Motor Shaft"];
+    R_MOTOR -> R_ENC [style=dotted, label=" Motor Shaft"];
+    L_ENC -> MCU_ISR [color="#16A34A", label=" Hardware Ext Interrupt (Pin 2: EXTI2)"];
+    R_ENC -> MCU_ISR [color="#16A34A", label=" Hardware Ext Interrupt (Pin 3: EXTI3)"];
+    MCU_WATCHDOG -> MCU_PWM [color="#DC2626", style=dashed, label=" Watchdog Reset if > 500ms"];
+
+    // --- Mechanical Couplings ---
+    L_MOTOR -> WHEELS [color="#0D9488", penwidth=2.5, label=" Direct Drive Left"];
+    R_MOTOR -> WHEELS [color="#0D9488", penwidth=2.5, label=" Direct Drive Right"];
+    CHASSIS -> WHEELS [style=invis];
+    CHASSIS -> CASTER_SKID [style=invis];
+    CHASSIS -> MOUNTS [style=invis];
+}

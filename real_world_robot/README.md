@@ -90,3 +90,4 @@ In a terminal on your laptop, simply run:
      > *"Exploration complete. Returning to user. I am ready. Where would you like to go?"*
    - Speak your destination into the Bluetooth headset (e.g. *"Take me to the washroom"*).
    - Robot calculates the safe line-of-sight standoff ($0.65\text{m}$ clearance) and autonomously escorts the user to the target.
+     a

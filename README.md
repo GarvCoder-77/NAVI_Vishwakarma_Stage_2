@@ -36,8 +36,15 @@ The imported implementation supports autonomous indoor navigation and simulation
 | `schematics/` | High-resolution circuit schematic diagram, full 66-point-to-point pin wiring netlist, and subsystem electrical rationale |
 | `hardware/native-cad/` | Native mechanical CAD and analysis exports |
 | `electronics/native-design/` | Schematics, PCB design files, BOMs, and electronics evidence |
-| `analysis/` | MATLAB or other engineering calculations and validation data |
+| `analysis/` | MATLAB or other engineering calculations, kinematics, and power budget validation data |
 | `evidence/maker-journey/` | Dated build photos and design-tool screenshots |
 | `evidence/external-media-links.md` | External demonstration-video links only |
-| `docs/` | Stage 2 notes, validation records, and supporting documentation |
+| `docs/` | Stage 2 technical documentation, commissioning runbooks, and simulation guides |
+
+## Technical Documentation & Runbooks
+
+* [**Bench Commissioning Runbook**](docs/hardware_quickstart_guide.md): Multimeter safety checks, I2C address dynamic remapping, motor direction checks.
+* [**Kinematics & Power Budget**](analysis/README.md): Forward differential drive kinematics, odometry formulas, 2.75-hour battery runtime analysis.
+* [**Arduino Pinout Matrix**](schematics/PINOUT_MATRIX.md): Microcontroller pin assignments, PWM timers, and power rail domain definitions.
+* [**Gazebo Simulation Guide**](docs/ros2_simulation_guide.md): Environment bringup, dynamic pedestrian spawning, and 14/14 automated test execution.
 

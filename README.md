@@ -32,6 +32,8 @@ The imported implementation supports autonomous indoor navigation and simulation
 | --- | --- |
 | `real_world_robot/` | Physical robot software: Arduino App Lab bundle (`.zip`), Arduino Uno Q MCU firmware, hardware ROS 2 nodes, and single-command `./start_demo.sh` launcher |
 | `ros_simulation/` | Complete Gazebo Harmonic indoor room simulation workspace, autonomous explorer, dynamic traffic simulator, and 14/14 automated test cases |
+| `hardware_components/` | Bill of materials (BOM), detailed technical specs, and engineering selection rationale for all 15 hardware components |
+| `schematics/` | High-resolution circuit schematic diagram, full 66-point-to-point pin wiring netlist, and subsystem electrical rationale |
 | `hardware/native-cad/` | Native mechanical CAD and analysis exports |
 | `electronics/native-design/` | Schematics, PCB design files, BOMs, and electronics evidence |
 | `analysis/` | MATLAB or other engineering calculations and validation data |

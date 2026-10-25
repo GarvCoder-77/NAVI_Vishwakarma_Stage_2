@@ -90,4 +90,16 @@ In a terminal on your laptop, simply run:
      > *"Exploration complete. Returning to user. I am ready. Where would you like to go?"*
    - Speak your destination into the Bluetooth headset (e.g. *"Take me to the washroom"*).
    - Robot calculates the safe line-of-sight standoff ($0.65\text{m}$ clearance) and autonomously escorts the user to the target.
-     a
+
+---
+
+## 🛡️ Pre-Flight Verification Checklist in `start_demo.sh`
+
+Before executing autonomous exploration, `start_demo.sh` runs the following safety and communication audits:
+
+- [x] **DDS Domain ID Check**: Ensures `ROS_DOMAIN_ID=42` is exported across all shells.
+- [x] **Network Ping & MPU Heartbeat**: Verifies Wi-Fi connectivity and ping to the Arduino UNO Q Linux core.
+- [x] **LiDAR Scan Stream**: Validates incoming `/scan` ranges between $0.15\text{m}$ and $12.0\text{m}$.
+- [x] **Camera Stream**: Validates `/camera/image_raw` frame arrival at $640 \times 480$ resolution.
+- [x] **Watchdog Safety**: Confirms STM32 MCU shuts off motor PWM if no velocity command is received within 500 ms.
+- [x] **TF Frame Continuity**: Confirms `map -> odom -> base_link -> laser_frame` tree is broadcasted without dropouts.

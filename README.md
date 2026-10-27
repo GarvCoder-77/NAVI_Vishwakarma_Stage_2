@@ -47,4 +47,5 @@ The imported implementation supports autonomous indoor navigation and simulation
 * [**Kinematics & Power Budget**](analysis/README.md): Forward differential drive kinematics, odometry formulas, 2.75-hour battery runtime analysis.
 * [**Arduino Pinout Matrix**](schematics/PINOUT_MATRIX.md): Microcontroller pin assignments, PWM timers, and power rail domain definitions.
 * [**Gazebo Simulation Guide**](docs/ros2_simulation_guide.md): Environment bringup, dynamic pedestrian spawning, and 14/14 automated test execution.
+* [**Demonstration Screencast Video**](evidence/external-media-links.md): Autonomous room exploration and obstacle avoidance video recording (Google Drive).
 

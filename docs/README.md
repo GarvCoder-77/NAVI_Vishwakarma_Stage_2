@@ -12,6 +12,7 @@ Welcome to the Stage 2 technical documentation for **NAVI (Navigation and Assist
 | [`../hardware_components/README.md`](../hardware_components/README.md) | Component Specifications & Selection Rationale | Microcontroller, sensors, drivers, battery calculations |
 | [`../schematics/README.md`](../schematics/README.md) | 66-Point Point-to-Point Circuit Netlist & Diagrams | Power bus topology, interrupt allocation, level isolation |
 | [`../schematics/PINOUT_MATRIX.md`](../schematics/PINOUT_MATRIX.md) | Pinout Cheat Sheet & Electrical Matrix | MCU pin multiplexing, PWM timers, logic domains |
+| [`../evidence/external-media-links.md`](../evidence/external-media-links.md) | Demonstration Screencast Video Link (Google Drive) | Full 2-room autonomous exploration and dynamic yielding |
 
 ## Stage 2 Engineering Objectives
 
